@@ -453,6 +453,20 @@ code {
   overflow-wrap: anywhere;
 }
 
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #2368a2;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.source-link svg {
+  width: 13px;
+  height: 13px;
+}
+
 .uncertain,
 .confirmed {
   flex: 0 0 auto;

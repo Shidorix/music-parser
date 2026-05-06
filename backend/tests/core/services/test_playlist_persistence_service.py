@@ -30,6 +30,7 @@ async def test_persists_parse_and_match_result() -> None:
                                     artist="Daft Punk",
                                     title="Around the World",
                                     source="demo",
+                                    external_url="https://example.test/track",
                                 )
                             ]
                         )
@@ -54,4 +55,6 @@ async def test_persists_parse_and_match_result() -> None:
     assert persisted.total_items == 1
     assert persisted.uncertain_count == 0
     assert persisted.items[0].match_track_id == "demo:daft-punk-around-the-world"
+    assert persisted.items[0].match_external_url == "https://example.test/track"
+    assert loaded.items[0].match_external_url == "https://example.test/track"
     assert loaded.items[0].metadata_json["parsed_track"]["pattern"] == "artist_title"

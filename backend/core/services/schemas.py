@@ -103,6 +103,10 @@ class PersistedPlaylistItemResult(BaseModel):
         description="Persisted parser confidence.",
     )
     match_track_id: str | None = Field(description="Persisted best match track id.")
+    match_external_url: str | None = Field(
+        default=None,
+        description="Public URL for opening the persisted best match.",
+    )
     match_score: float | None = Field(
         default=None,
         ge=0.0,

@@ -2,14 +2,11 @@
 
 from __future__ import annotations
 
-import re
 from collections.abc import Sequence
-from typing import Final
 
 from backend.core.matcher.base import BaseMatcher
+from backend.core.matcher.normalization import normalize_match_text
 from backend.core.matcher.schemas import MatchResult, TrackCandidate
-
-_WHITESPACE_RE: Final[re.Pattern[str]] = re.compile(r"\s+")
 
 
 class LevenshteinMatcher(BaseMatcher):
@@ -77,8 +74,7 @@ class LevenshteinMatcher(BaseMatcher):
         )
 
     def _normalize(self, value: str) -> str:
-        compacted_value = _WHITESPACE_RE.sub(" ", value.casefold().strip())
-        return compacted_value
+        return normalize_match_text(value)
 
     def _distance(self, left: str, right: str) -> int:
         if left == right:

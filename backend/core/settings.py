@@ -48,7 +48,15 @@ class Settings(BaseSettings):
     )
     spotify_access_token: str | None = Field(
         default=None,
-        description="Spotify Web API access token.",
+        description="Optional Spotify Web API access token override.",
+    )
+    spotify_client_id: str | None = Field(
+        default=None,
+        description="Spotify application client id for Client Credentials auth.",
+    )
+    spotify_client_secret: str | None = Field(
+        default=None,
+        description="Spotify application client secret for Client Credentials auth.",
     )
     spotify_market: str | None = Field(
         default=None,

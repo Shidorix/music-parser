@@ -48,6 +48,7 @@ export type TrackCandidate = {
   artist: string | null;
   title: string;
   source: string;
+  external_url: string | null;
 };
 
 export type MatchResult = {
@@ -108,6 +109,7 @@ export type PersistedPlaylistItemResult = {
   parsed_title: string | null;
   parser_confidence: number;
   match_track_id: string | null;
+  match_external_url: string | null;
   match_score: number | null;
   match_algorithm: string | null;
   source: string | null;

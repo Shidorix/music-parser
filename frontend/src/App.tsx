@@ -3,6 +3,7 @@ import {
   Check,
   Download,
   Eye,
+  ExternalLink,
   FileMusic,
   Loader2,
   Pencil,
@@ -460,6 +461,7 @@ export function App() {
                           <span>{item.match_track_id ?? "no match"}</span>
                           <span>{formatScore(item.match_score)}</span>
                           <span>{item.source ?? "unknown"}</span>
+                          <SourceLink href={item.match_external_url} />
                         </div>
                       </div>
 
@@ -573,12 +575,33 @@ function PreviewPanel({ preview }: { preview: ParseAndMatchResult | null }) {
               <span>{bestMatch?.track_id ?? "no match"}</span>
               <span>{formatScore(item.best_score)}</span>
               <span>{bestMatch?.algorithm ?? "n/a"}</span>
+              <span>{bestMatch?.source ?? "unknown"}</span>
+              <SourceLink href={bestMatch?.candidate.external_url ?? null} />
             </div>
             <p>{item.explanation}</p>
           </article>
         );
       })}
     </div>
+  );
+}
+
+function SourceLink({ href }: { href: string | null }) {
+  if (href === null) {
+    return null;
+  }
+
+  return (
+    <a
+      className="source-link"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      title="Open source"
+    >
+      <ExternalLink aria-hidden="true" />
+      open
+    </a>
   );
 }
 

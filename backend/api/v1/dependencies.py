@@ -70,10 +70,16 @@ def build_track_search_providers(settings: Settings) -> list[TrackSearchProvider
     if settings.enable_demo_provider:
         providers.append(DemoTrackSearchProvider(get_demo_track_catalog()))
 
-    if settings.spotify_access_token:
+    if settings.spotify_access_token or (
+        settings.spotify_client_id and settings.spotify_client_secret
+    ):
         providers.append(
             SpotifyTrackSearchProvider(
-                SpotifyClient(access_token=settings.spotify_access_token),
+                SpotifyClient(
+                    access_token=settings.spotify_access_token,
+                    client_id=settings.spotify_client_id,
+                    client_secret=settings.spotify_client_secret,
+                ),
                 market=settings.spotify_market,
             )
         )

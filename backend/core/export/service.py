@@ -50,6 +50,7 @@ class PlaylistExportService:
             "parsed_title",
             "parser_confidence",
             "match_track_id",
+            "match_external_url",
             "match_score",
             "match_algorithm",
             "source",
@@ -75,7 +76,7 @@ class PlaylistExportService:
         for item in playlist.items:
             title = self._build_display_title(item)
             lines.append(f"#EXTINF:-1,{title}")
-            lines.append(item.match_track_id or title)
+            lines.append(item.match_external_url or item.match_track_id or title)
 
         return PlaylistExportResult(
             filename=self._build_filename(playlist.playlist_id, "m3u"),
@@ -94,6 +95,7 @@ class PlaylistExportService:
             "parsed_title": item.parsed_title or "",
             "parser_confidence": item.parser_confidence,
             "match_track_id": item.match_track_id or "",
+            "match_external_url": item.match_external_url or "",
             "match_score": item.match_score if item.match_score is not None else "",
             "match_algorithm": item.match_algorithm or "",
             "source": item.source or "",

@@ -14,6 +14,10 @@ class TrackCandidate(BaseModel):
     artist: str | None = Field(default=None, description="Candidate artist name.")
     title: str = Field(description="Candidate track title.")
     source: str = Field(description="Candidate source, for example spotify or youtube.")
+    external_url: str | None = Field(
+        default=None,
+        description="Optional public URL for opening the candidate in its source.",
+    )
 
     @property
     def display_text(self) -> str:

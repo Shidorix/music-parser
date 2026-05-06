@@ -229,11 +229,43 @@ bun run build
 - `PLAYLIST_PARSER_CONFIDENCE_THRESHOLD` - threshold для uncertain matches.
 - `PLAYLIST_PARSER_ENABLE_DEMO_PROVIDER` - demo catalog для локального запуска.
 - `PLAYLIST_PARSER_CORS_ALLOWED_ORIGINS` - разрешенные frontend origins.
-- `PLAYLIST_PARSER_SPOTIFY_ACCESS_TOKEN` - optional Spotify token.
+- `PLAYLIST_PARSER_SPOTIFY_ACCESS_TOKEN` - optional Spotify token override.
+- `PLAYLIST_PARSER_SPOTIFY_CLIENT_ID` - Spotify app client id.
+- `PLAYLIST_PARSER_SPOTIFY_CLIENT_SECRET` - Spotify app client secret.
 - `PLAYLIST_PARSER_YOUTUBE_API_KEY` - optional YouTube API key.
 
 Секреты и локальные файлы не должны попадать в репозиторий: `.env`, SQLite DB,
 `node_modules`, `dist`, cache-файлы и локальные agent-файлы игнорируются.
+
+## Spotify And YouTube Providers
+
+Demo provider включен по умолчанию и позволяет тестировать приложение без внешних
+ключей. Реальные источники подключаются через `.env`.
+
+Spotify работает через официальный Client Credentials flow:
+
+```env
+PLAYLIST_PARSER_SPOTIFY_CLIENT_ID=your_client_id
+PLAYLIST_PARSER_SPOTIFY_CLIENT_SECRET=your_client_secret
+PLAYLIST_PARSER_SPOTIFY_MARKET=US
+```
+
+`PLAYLIST_PARSER_SPOTIFY_ACCESS_TOKEN` можно использовать как ручной override,
+но для обычной работы предпочтительнее `client_id/client_secret`: backend сам
+получит и закэширует access token.
+
+YouTube работает через официальный YouTube Data API v3:
+
+```env
+PLAYLIST_PARSER_YOUTUBE_API_KEY=your_api_key
+PLAYLIST_PARSER_YOUTUBE_REGION_CODE=RU
+PLAYLIST_PARSER_YOUTUBE_RELEVANCE_LANGUAGE=ru
+```
+
+Если включены несколько providers, backend собирает кандидатов из каждого
+источника, дедуплицирует их и затем прогоняет через matcher. Для Spotify и
+YouTube результаты содержат `external_url`, поэтому frontend может открыть
+найденный трек или видео в исходном сервисе.
 
 ## Документация
 

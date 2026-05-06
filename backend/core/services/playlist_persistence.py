@@ -164,6 +164,7 @@ class PlaylistPersistenceService:
         playlist_id: UUID,
         item_id: UUID,
         match_track_id: str,
+        match_external_url: str | None,
         match_score: float,
         match_algorithm: str,
         source: str,
@@ -176,6 +177,7 @@ class PlaylistPersistenceService:
             item_id=item_id,
             data=PlaylistItemReviewUpdate(
                 match_track_id=match_track_id,
+                match_external_url=match_external_url,
                 match_score=match_score,
                 match_algorithm=match_algorithm,
                 source=source,
@@ -204,6 +206,9 @@ class PlaylistPersistenceService:
             parsed_title=item.parsed_track.title,
             parser_confidence=item.parsed_track.confidence,
             match_track_id=best_match.track_id if best_match is not None else None,
+            match_external_url=(
+                best_match.candidate.external_url if best_match is not None else None
+            ),
             match_score=best_match.score if best_match is not None else None,
             match_algorithm=best_match.algorithm if best_match is not None else None,
             source=best_match.source if best_match is not None else None,
@@ -250,6 +255,7 @@ class PlaylistPersistenceService:
             parsed_title=item.parsed_title,
             parser_confidence=item.parser_confidence,
             match_track_id=item.match_track_id,
+            match_external_url=item.match_external_url,
             match_score=item.match_score,
             match_algorithm=item.match_algorithm,
             source=item.source,

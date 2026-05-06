@@ -2,14 +2,11 @@
 
 from __future__ import annotations
 
-import re
 from collections.abc import Sequence
-from typing import Final
 
 from backend.core.matcher.base import BaseMatcher
+from backend.core.matcher.normalization import normalize_match_text
 from backend.core.matcher.schemas import MatchResult, TrackCandidate
-
-_WHITESPACE_RE: Final[re.Pattern[str]] = re.compile(r"\s+")
 
 
 class JaroWinklerMatcher(BaseMatcher):
@@ -85,7 +82,7 @@ class JaroWinklerMatcher(BaseMatcher):
         )
 
     def _normalize(self, value: str) -> str:
-        return _WHITESPACE_RE.sub(" ", value.casefold().strip())
+        return normalize_match_text(value)
 
     def _jaro_winkler_similarity(self, left: str, right: str) -> float:
         jaro_similarity = self._jaro_similarity(left, right)

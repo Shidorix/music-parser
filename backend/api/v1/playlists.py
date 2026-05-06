@@ -65,6 +65,10 @@ class ReviewPlaylistItemRequest(BaseModel):
         min_length=1,
         description="Track id selected during manual review.",
     )
+    match_external_url: str | None = Field(
+        default=None,
+        description="Optional public URL for the manually selected track.",
+    )
     match_score: float = Field(
         ge=0.0,
         le=1.0,
@@ -335,6 +339,7 @@ async def review_playlist_item(
         playlist_id=playlist_id,
         item_id=item_id,
         match_track_id=request.match_track_id,
+        match_external_url=request.match_external_url,
         match_score=request.match_score,
         match_algorithm=request.match_algorithm,
         source=request.source,

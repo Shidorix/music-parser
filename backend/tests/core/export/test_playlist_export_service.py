@@ -17,6 +17,7 @@ def test_exports_playlist_as_json() -> None:
     assert result.media_type == "application/json"
     assert '"session_id": "session-1"' in result.content
     assert '"match_track_id": "demo:daft-punk-around-the-world"' in result.content
+    assert '"match_external_url": "https://example.test/track"' in result.content
 
 
 def test_exports_playlist_as_csv() -> None:
@@ -31,7 +32,8 @@ def test_exports_playlist_as_csv() -> None:
     assert result.media_type == "text/csv"
     assert result.content.splitlines()[0] == (
         "position,raw_input,parsed_artist,parsed_title,parser_confidence,"
-        "match_track_id,match_score,match_algorithm,source,is_uncertain"
+        "match_track_id,match_external_url,match_score,match_algorithm,source,"
+        "is_uncertain"
     )
     assert "Daft Punk - Around the World" in result.content
 
@@ -49,7 +51,7 @@ def test_exports_playlist_as_m3u() -> None:
     assert result.content == (
         "#EXTM3U\n"
         "#EXTINF:-1,Daft Punk - Around the World\n"
-        "demo:daft-punk-around-the-world\n"
+        "https://example.test/track\n"
     )
 
 
@@ -70,6 +72,7 @@ def _build_playlist() -> PersistedPlaylistResult:
                 parsed_title="Around the World",
                 parser_confidence=0.95,
                 match_track_id="demo:daft-punk-around-the-world",
+                match_external_url="https://example.test/track",
                 match_score=1.0,
                 match_algorithm="levenshtein",
                 source="demo",

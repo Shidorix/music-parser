@@ -219,4 +219,5 @@ class YouTubeClient:
             artist=None,
             title=unescape(title),
             source="youtube",
+            external_url=f"https://www.youtube.com/watch?v={video_id}",
         )

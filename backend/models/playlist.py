@@ -48,6 +48,10 @@ class PlaylistItem(Base):
     parsed_title: Mapped[str | None] = mapped_column(String(255), nullable=True)
     parser_confidence: Mapped[float] = mapped_column(Float)
     match_track_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    match_external_url: Mapped[str | None] = mapped_column(
+        String(1024),
+        nullable=True,
+    )
     match_score: Mapped[float | None] = mapped_column(Float, nullable=True)
     match_algorithm: Mapped[str | None] = mapped_column(String(128), nullable=True)
     source: Mapped[str | None] = mapped_column(String(128), nullable=True)

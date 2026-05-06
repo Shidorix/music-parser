@@ -43,6 +43,7 @@ async def test_search_videos_maps_youtube_items_to_candidates() -> None:
     assert results[0].artist is None
     assert results[0].title == "Daft Punk - Around the World & More"
     assert results[0].source == "youtube"
+    assert results[0].external_url == "https://www.youtube.com/watch?v=video-1"
 
 
 @pytest.mark.asyncio

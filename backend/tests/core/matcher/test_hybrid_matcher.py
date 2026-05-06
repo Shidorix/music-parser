@@ -54,6 +54,25 @@ def test_hybrid_matcher_handles_noisy_kino_query() -> None:
     assert results[0].score >= 0.8
 
 
+def test_hybrid_matcher_ignores_common_youtube_title_noise() -> None:
+    matcher = HybridMatcher()
+    candidates = [
+        TrackCandidate(
+            track_id="youtube:video-1",
+            artist=None,
+            title="Daft Punk - Around the World (Official Music Video) [HD]",
+            source="youtube",
+            external_url="https://www.youtube.com/watch?v=video-1",
+        )
+    ]
+
+    results = matcher.match("Daft Punk - Around the World", candidates)
+
+    assert results[0].track_id == "youtube:video-1"
+    assert results[0].score == 1.0
+    assert results[0].normalized_candidate == "daft punk - around the world"
+
+
 def test_hybrid_matcher_keeps_heavily_corrupted_query_below_threshold() -> None:
     matcher = HybridMatcher()
     candidates = [

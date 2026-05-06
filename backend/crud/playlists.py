@@ -23,6 +23,7 @@ class PlaylistItemCreate(BaseModel):
     parsed_title: str | None = None
     parser_confidence: float = Field(ge=0.0, le=1.0)
     match_track_id: str | None = None
+    match_external_url: str | None = None
     match_score: float | None = Field(default=None, ge=0.0, le=1.0)
     match_algorithm: str | None = None
     source: str | None = None
@@ -46,6 +47,7 @@ class PlaylistItemReviewUpdate(BaseModel):
     model_config = ConfigDict(frozen=True)
 
     match_track_id: str = Field(min_length=1)
+    match_external_url: str | None = None
     match_score: float = Field(ge=0.0, le=1.0)
     match_algorithm: str = Field(min_length=1)
     source: str = Field(min_length=1)
@@ -154,6 +156,7 @@ class PlaylistCRUD:
             return None
 
         item.match_track_id = data.match_track_id
+        item.match_external_url = data.match_external_url
         item.match_score = data.match_score
         item.match_algorithm = data.match_algorithm
         item.source = data.source
