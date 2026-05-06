@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: playlist_parser
+      POSTGRES_USER: playlist_parser
+      POSTGRES_PASSWORD: playlist_parser
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U playlist_parser -d playlist_parser"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+    environment:
+      PLAYLIST_PARSER_ENVIRONMENT: docker
+      PLAYLIST_PARSER_DATABASE_URL: postgresql+asyncpg://playlist_parser:playlist_parser@db:5432/playlist_parser
+      PLAYLIST_PARSER_AUTO_CREATE_TABLES: "false"
+      PLAYLIST_PARSER_CORS_ALLOWED_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
+      PLAYLIST_PARSER_CONFIDENCE_THRESHOLD: "0.8"
+      PLAYLIST_PARSER_ENABLE_DEMO_PROVIDER: "true"
+      PLAYLIST_PARSER_SPOTIFY_ACCESS_TOKEN: ""
+      PLAYLIST_PARSER_SPOTIFY_MARKET: ""
+      PLAYLIST_PARSER_YOUTUBE_API_KEY: ""
+      PLAYLIST_PARSER_YOUTUBE_REGION_CODE: ""
+      PLAYLIST_PARSER_YOUTUBE_RELEVANCE_LANGUAGE: ""
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

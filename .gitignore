@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+.pytest_cache/
+pytest-cache-files-*/
+.ruff_cache/
+.mypy_cache/
+.tmp/
+.coverage
+htmlcov/
+.venv/
+venv/
+*.egg-info/
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Local agent/editor context
+AGENTS.md
+GEMINI.md
+.agents/
+skills-lock.json
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,10 @@
+{"raw_input":"Daft Punk - Around the World","expected_artist":"daft punk","expected_title":"around the world","expected_pattern":"artist_title","notes":"Clear English artist-title separator baseline."}
+{"raw_input":"01. Кино — Группа крови","expected_artist":"кино","expected_title":"группа крови","expected_pattern":"artist_title","notes":"Russian line with list index and em dash normalization."}
+{"raw_input":"Bonobo - Kerala (Official Video)","expected_artist":"bonobo","expected_title":"kerala","expected_pattern":"artist_title","notes":"YouTube-style trailing metadata should be removed from title."}
+{"raw_input":"Around the World (Daft Punk)","expected_artist":"daft punk","expected_title":"around the world","expected_pattern":"title_artist_parenthesis","notes":"Title followed by parenthesized artist."}
+{"raw_input":"Нас не догонят (t.A.T.u.)","expected_artist":"t.a.t.u.","expected_title":"нас не догонят","expected_pattern":"title_artist_parenthesis","notes":"Mixed-script parenthesized artist."}
+{"raw_input":"Radiohead | Nude","expected_artist":"radiohead","expected_title":"nude","expected_pattern":"artist_title","notes":"Pipe separator baseline."}
+{"raw_input":"Massive Attack: Teardrop","expected_artist":"massive attack","expected_title":"teardrop","expected_pattern":"artist_title","notes":"Colon separator baseline."}
+{"raw_input":"* The Weeknd - Blinding Lights","expected_artist":"the weeknd","expected_title":"blinding lights","expected_pattern":"artist_title","notes":"Bullet/list marker should be removed."}
+{"raw_input":"Unknown floating track name","expected_artist":null,"expected_title":"unknown floating track name","expected_pattern":"unknown","notes":"Unknown pattern should still preserve a possible title."}
+{"raw_input":"Сплин - Выхода нет [текст]","expected_artist":"сплин","expected_title":"выхода нет","expected_pattern":"artist_title","notes":"Russian lyrics metadata in brackets should be removed."}

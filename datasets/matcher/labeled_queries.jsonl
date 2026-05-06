@@ -1,0 +1,14 @@
+{"query":"Daft Punk - Around the World","expected_track_id":"demo:daft-punk-around-the-world","notes":"Exact artist-title query."}
+{"query":"Daft Punk Around the Wrold","expected_track_id":"demo:daft-punk-around-the-world","notes":"Small typo in title."}
+{"query":"kino - gruppa krovi","expected_track_id":"demo:kino-gruppa-krovi","notes":"Latin transliteration of Russian track."}
+{"query":"Bonobo Kerala official video","expected_track_id":"demo:bonobo-kerala","notes":"YouTube-style noisy query."}
+{"query":"Radiohed - Nude","expected_track_id":"demo:radiohead-nude","notes":"Small typo in artist."}
+{"query":"Massive Attack Teardrop","expected_track_id":"demo:massive-attack-teardrop","notes":"Missing separator."}
+{"query":"Boards Canada Roygbiv","expected_track_id":"demo:boards-of-canada-roygbiv","notes":"Missing stopword in artist name."}
+{"query":"The Weekend - Blinding Light","expected_track_id":"demo:the-weeknd-blinding-lights","notes":"Artist typo and singular title token."}
+{"query":"Splin - Vihoda net tekst","expected_track_id":"demo:split-vyhoda-net","notes":"Russian track transliterated with typo and metadata noise."}
+{"query":"Queen Bohemian Rapsody live","expected_track_id":"demo:queen-bohemian-rhapsody","notes":"Title typo with live metadata noise."}
+{"query":"Queen Radio Gaga","expected_track_id":"demo:queen-radio-ga-ga","notes":"Missing separators in title words."}
+{"query":"Radiohead - Nude live","expected_track_id":"demo:radiohead-nude","notes":"Ambiguous near-duplicate with Nudes candidate."}
+{"query":"Massive Attack - Teardrop remastered","expected_track_id":"demo:massive-attack-teardrop","notes":"Ambiguous near-duplicate with plural title candidate."}
+{"query":"The Weeknd - Blinding Lights official audio","expected_track_id":"demo:the-weeknd-blinding-lights","notes":"Ambiguous near-duplicate with singular title candidate."}
